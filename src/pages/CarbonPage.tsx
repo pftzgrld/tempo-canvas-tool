@@ -147,9 +147,9 @@ export default function CarbonPage() {
                     }}
                   >
                     <option value="">— Select jurisdiction —</option>
-                    {GROUPS.map((group) => (
-                      <optgroup key={group} label={group}>
-                        {JURISDICTIONS.filter((j) => j.group === group).map((j) => (
+                    {GROUPS.map((g) => (
+                      <optgroup key={g.key} label={g.label}>
+                        {JURISDICTIONS.filter((j) => j.group === g.key).map((j) => (
                           <option key={j.id} value={j.id}>
                             {j.name} ({j.intensity} gCO₂/kWh)
                           </option>
