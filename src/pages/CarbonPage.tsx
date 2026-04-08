@@ -56,11 +56,11 @@ export default function CarbonPage() {
         <div className="mx-auto flex items-center justify-between px-6 py-3" style={{ maxWidth: 1280 }}>
           <div className="flex items-center gap-4">
             <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.05em", color: "#1A1A1A" }}>
-              Hurdle
+              Hutchins
             </span>
             <div style={{ width: 1, height: 24, background: "hsla(0, 0%, 10%, 0.10)" }} />
             <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.15em", color: "#595959" }}>
-              Data Centre Carbon
+              DATA CENTRE EMISSIONS
             </span>
           </div>
           <span
@@ -87,7 +87,7 @@ export default function CarbonPage() {
           </span>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 600, color: "#1A1A1A", lineHeight: 1.15 }}>
             Data Centre{" "}
-            <span style={{ fontStyle: "italic", color: "#E84C3D" }}>Carbon Footprint</span>
+            <span style={{ fontStyle: "italic", color: "#E84C3D" }}>Emissions</span>
           </h1>
           <p style={{ fontFamily: "'Lora', serif", fontSize: 16, color: "#595959", maxWidth: 640, lineHeight: 1.7 }}>
             Lifetime Scope 2 emissions across grid-connected and islanded power scenarios. Compare jurisdictions, adjust facility parameters, and model grid decarbonisation.
