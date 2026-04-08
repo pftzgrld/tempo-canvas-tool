@@ -274,3 +274,32 @@
 .animate-float-delayed { animation: float 6s ease-in-out infinite 2s; }
 .animate-float-reverse { animation: floatReverse 6s ease-in-out infinite; }
 .animate-gentle-pulse { animation: gentlePulse 3s ease-in-out infinite; }
+
+/* Carbon slider */
+.carbon-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #F5F3EF;
+  border-radius: 9999px;
+  outline: none;
+}
+.carbon-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #E84C3D;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.carbon-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #E84C3D;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
