@@ -164,7 +164,7 @@ export default function CarbonPage() {
                         {formatKt(result.totalKt)}
                       </div>
                       <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#595959", marginTop: 2 }}>
-                        {jur.group === "Islanded (Off-Grid)" ? "Islanded" : "Grid"} · {jur.intensity} gCO₂/kWh · {lifecycle} yr
+                        {jur.group === "islanded" ? "Islanded" : "Grid"} · {jur.intensity} gCO₂/kWh · {lifecycle} yr
                       </div>
                     </div>
                   )}
@@ -338,10 +338,10 @@ function SliderParam({
   return (
     <div>
       <div className="flex items-baseline justify-between mb-3">
-        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.15em", color: "#595959" }}>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#595959" }}>
           {label}
         </span>
-        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 600, color: "#1A1A1A" }}>
+        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 500, color: "#1A1A1A" }}>
           {value}
         </span>
       </div>
