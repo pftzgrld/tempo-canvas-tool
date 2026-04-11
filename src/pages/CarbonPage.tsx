@@ -44,21 +44,26 @@ export default function CarbonPage() {
 
   return (
     <div style={{ background: "#FAF8F5" }} className="min-h-screen">
-      {/* Sticky Header */}
-      <header
-        className="sticky top-0 z-50"
-        style={{
-          background: "hsla(40, 33%, 97%, 0.90)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid hsla(0, 0%, 10%, 0.08)",
-        }}
-      >
-        <div className="mx-auto flex items-center justify-between px-6 py-3" style={{ maxWidth: 1280 }}>
+      {/* Sticky Header — Hurdle-style glass pill */}
+      <header className="sticky top-0 z-50" style={{ padding: "12px 32px", background: "#FAF8F5" }}>
+        <div
+          className="mx-auto flex items-center justify-between"
+          style={{
+            maxWidth: 1280,
+            background: "rgba(250, 248, 245, 0.8)",
+            backdropFilter: "blur(12px)",
+            border: "1px solid rgba(26, 26, 26, 0.05)",
+            borderRadius: 16,
+            boxShadow: "rgba(26,26,26,0.05) 0px 20px 25px -5px, rgba(26,26,26,0.05) 0px 8px 10px -6px",
+            height: 62,
+            padding: "0 24px",
+          }}
+        >
           <div className="flex items-center gap-4">
-            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.05em", color: "#1A1A1A" }}>
+            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, fontWeight: 700, letterSpacing: "-1.2px", color: "#1A1A1A" }}>
               Hutchins Climate Capital
             </span>
-            <div style={{ width: 1, height: 24, background: "hsla(0, 0%, 10%, 0.10)" }} />
+            <div style={{ width: 1, height: 24, background: "rgba(26, 26, 26, 0.12)" }} />
             <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 500, color: "#1A1A1A" }}>
               Data Centre Emissions
             </span>
@@ -66,44 +71,43 @@ export default function CarbonPage() {
         </div>
       </header>
 
-      <main className="mx-auto px-4 sm:px-6 py-6 flex flex-col gap-6" style={{ maxWidth: 1280 }}>
-        {/* Hero — compact */}
-        <section className="text-center flex flex-col items-center gap-2 pt-2 pb-0">
+      <main className="mx-auto px-4 sm:px-8 py-4 flex flex-col gap-5" style={{ maxWidth: 1280 }}>
+        {/* Hero — minimal */}
+        <section className="text-center flex flex-col items-center gap-1 pt-1 pb-0">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 600, color: "#1A1A1A", lineHeight: 1.15 }}>
             Data Centre{" "}
             <span style={{ fontStyle: "italic", color: "#E84C3D" }}>Emissions</span>
           </h1>
-          <p style={{ fontFamily: "'Lora', serif", fontSize: 15, color: "#595959", maxWidth: 640, lineHeight: 1.6 }}>
+          <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, color: "rgba(26,26,26,0.8)", maxWidth: 640, lineHeight: 1.5 }}>
             Lifetime Scope 2 emissions across grid-connected and islanded power scenarios.
           </p>
         </section>
 
-        {/* Scenario Cards */}
-        <section className="mx-auto w-full" style={{ maxWidth: 1024 }}>
-          <div className="flex flex-wrap gap-4">
+        {/* Scenario Cards — compact, inline */}
+        <section className="w-full">
+          <div className="flex flex-wrap gap-3">
             {SCENARIO_LABELS.map((label, i) => {
               const sel = selections[i];
-              const jur = sel ? JURISDICTION_MAP[sel] : null;
               const result = results[i];
               const isActive = !!sel;
 
               return (
                 <div
                   key={label}
-                  className="flex-1 min-w-[280px] rounded-2xl p-5 transition-all duration-300"
+                  className="flex-1 min-w-[220px] rounded-2xl p-4 transition-all duration-300"
                   style={{
                     background: isActive ? "rgba(255, 255, 255, 0.90)" : "rgba(255, 255, 255, 0.60)",
                     boxShadow: isActive
-                      ? "0 20px 25px -5px rgba(0,0,0,0.10), 0 8px 10px -6px rgba(0,0,0,0.10)"
-                      : "0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.04)",
+                      ? "rgba(0,0,0,0.1) 0px 20px 25px -5px, rgba(0,0,0,0.1) 0px 8px 10px -6px"
+                      : "rgba(0,0,0,0.05) 0px 20px 25px -5px, rgba(0,0,0,0.04) 0px 8px 10px -6px",
                     border: isActive
                       ? "1px solid hsla(5, 82%, 56%, 0.15)"
-                      : "1px solid hsla(0, 0%, 10%, 0.05)",
+                      : "1px solid rgba(26, 26, 26, 0.05)",
                   }}
                 >
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center gap-2 mb-3">
                     <span
-                      className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-semibold"
+                      className="w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-semibold"
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         background: SCENARIO_COLORS[i],
@@ -120,7 +124,7 @@ export default function CarbonPage() {
                   <select
                     value={sel || ""}
                     onChange={(e) => setSelection(i, e.target.value || null)}
-                    className="w-full rounded-xl px-3 py-2.5 text-sm transition-colors duration-300 cursor-pointer"
+                    className="w-full rounded-xl px-3 py-2 text-sm cursor-pointer"
                     style={{
                       fontFamily: "'Inter', sans-serif",
                       fontSize: 13,
@@ -142,13 +146,10 @@ export default function CarbonPage() {
                     ))}
                   </select>
 
-                  {jur && result && (
-                    <div className="mt-4">
-                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 32, fontWeight: 600, color: SCENARIO_COLORS[i] }}>
+                  {result && (
+                    <div className="mt-3">
+                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, fontWeight: 600, color: SCENARIO_COLORS[i] }}>
                         {formatKt(result.totalKt)}
-                      </div>
-                      <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#595959", marginTop: 2 }}>
-                        {jur.group === "islanded" ? "Islanded" : "Grid"} · {jur.intensity} gCO₂/kWh · {lifecycle} yr
                       </div>
                     </div>
                   )}
@@ -158,71 +159,81 @@ export default function CarbonPage() {
           </div>
         </section>
 
-        {/* Chart — immediately after scenario cards */}
-        <section className="mx-auto w-full" style={{ maxWidth: 1024 }}>
-          <CumulativeChart
-            activeScenarios={activeScenarios.map((s) => ({
-              label: SCENARIO_LABELS[s.index],
-              color: SCENARIO_COLORS[s.index],
-              result: s.result,
-              name: s.jurisdiction.name,
-            }))}
-            lifecycle={lifecycle}
-          />
-        </section>
-
-        {/* Parameters — below chart */}
-        <section className="mx-auto w-full rounded-2xl p-6" style={{ maxWidth: 1024, background: "rgba(255, 255, 255, 0.90)", border: "1px solid hsla(0, 0%, 10%, 0.05)", boxShadow: "0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.04)" }}>
-          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#595959", marginBottom: 20 }}>
-            FACILITY PARAMETERS
+        {/* Chart + Parameters — side by side */}
+        <section className="w-full flex flex-col lg:flex-row gap-5">
+          {/* Chart — takes most space */}
+          <div className="flex-1 min-w-0">
+            <CumulativeChart
+              activeScenarios={activeScenarios.map((s) => ({
+                label: SCENARIO_LABELS[s.index],
+                color: SCENARIO_COLORS[s.index],
+                result: s.result,
+                name: s.jurisdiction.name,
+              }))}
+              lifecycle={lifecycle}
+            />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <SliderParam
-              label="DC Size"
-              value={formatMW(dcSizeMW)}
-              note={`Total draw: ${formatMW(Math.round(dcSizeMW * pue))}`}
-              min={0}
-              max={DC_SIZES.length - 1}
-              step={1}
-              rawValue={dcSizeIndex}
-              onChange={setDcSizeIndex}
-            />
-            <SliderParam
-              label="PUE"
-              value={pue.toFixed(2)}
-              note="Total facility power ÷ IT power"
-              min={1.05}
-              max={1.80}
-              step={0.05}
-              rawValue={pue}
-              onChange={setPue}
-            />
-            <SliderParam
-              label="Lifecycle"
-              value={`${lifecycle} yr`}
-              note={`${BASE_YEAR}–${BASE_YEAR + lifecycle}`}
-              min={15}
-              max={35}
-              step={1}
-              rawValue={lifecycle}
-              onChange={setLifecycle}
-            />
-            <SliderParam
-              label="Grid Decarb"
-              value={`${gridDecarb.toFixed(1)}%`}
-              note="Grid sources only — islanded holds constant"
-              min={0}
-              max={5}
-              step={0.5}
-              rawValue={gridDecarb}
-              onChange={setGridDecarb}
-            />
+
+          {/* Parameters — sidebar */}
+          <div
+            className="lg:w-[280px] shrink-0 rounded-2xl p-5"
+            style={{
+              background: "rgba(255, 255, 255, 0.90)",
+              border: "1px solid rgba(26, 26, 26, 0.05)",
+              boxShadow: "rgba(0,0,0,0.05) 0px 20px 25px -5px, rgba(0,0,0,0.04) 0px 8px 10px -6px",
+            }}
+          >
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#595959", marginBottom: 20 }}>
+              FACILITY PARAMETERS
+            </div>
+            <div className="flex flex-col gap-5">
+              <SliderParam
+                label="DC Size"
+                value={formatMW(dcSizeMW)}
+                note={`Total draw: ${formatMW(Math.round(dcSizeMW * pue))}`}
+                min={0}
+                max={DC_SIZES.length - 1}
+                step={1}
+                rawValue={dcSizeIndex}
+                onChange={setDcSizeIndex}
+              />
+              <SliderParam
+                label="PUE"
+                value={pue.toFixed(2)}
+                note="Total facility power ÷ IT power"
+                min={1.05}
+                max={1.80}
+                step={0.05}
+                rawValue={pue}
+                onChange={setPue}
+              />
+              <SliderParam
+                label="Lifecycle"
+                value={`${lifecycle} yr`}
+                note={`${BASE_YEAR}–${BASE_YEAR + lifecycle}`}
+                min={15}
+                max={35}
+                step={1}
+                rawValue={lifecycle}
+                onChange={setLifecycle}
+              />
+              <SliderParam
+                label="Grid Decarb"
+                value={`${gridDecarb.toFixed(1)}%`}
+                note="Grid sources only — islanded holds constant"
+                min={0}
+                max={5}
+                step={0.5}
+                rawValue={gridDecarb}
+                onChange={setGridDecarb}
+              />
+            </div>
           </div>
         </section>
 
         {/* Lifetime Totals */}
         {activeScenarios.length >= 2 && (
-          <section className="mx-auto w-full rounded-2xl p-6" style={{ maxWidth: 1024, background: "rgba(255, 255, 255, 0.90)", border: "1px solid hsla(0, 0%, 10%, 0.05)", boxShadow: "0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.04)" }}>
+          <section className="w-full rounded-2xl p-6" style={{ background: "rgba(255, 255, 255, 0.90)", border: "1px solid rgba(26, 26, 26, 0.05)", boxShadow: "rgba(0,0,0,0.05) 0px 20px 25px -5px, rgba(0,0,0,0.04) 0px 8px 10px -6px" }}>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#595959", marginBottom: 16 }}>
               LIFETIME TOTALS
             </div>
@@ -238,7 +249,7 @@ export default function CarbonPage() {
                     >
                       {SCENARIO_LABELS[s.index]}
                     </span>
-                    <span className="w-36 truncate shrink-0" style={{ fontFamily: "'Lora', serif", fontSize: 14, color: "#1A1A1A" }}>
+                    <span className="w-36 truncate shrink-0" style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, color: "#1A1A1A" }}>
                       {shortName(s.jurisdiction.name)}
                     </span>
                     <div className="flex-1 h-2 rounded-full" style={{ background: "#F5F3EF" }}>
@@ -260,8 +271,8 @@ export default function CarbonPage() {
         {/* Savings Callout */}
         {hasSavings && (
           <section
-            className="mx-auto w-full rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
-            style={{ maxWidth: 1024, background: "hsla(5, 82%, 56%, 0.10)" }}
+            className="w-full rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+            style={{ background: "hsla(5, 82%, 56%, 0.10)" }}
           >
             <div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#E84C3D", marginBottom: 8 }}>
@@ -270,7 +281,7 @@ export default function CarbonPage() {
               <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 3vw, 36px)", fontWeight: 700, color: "#E84C3D" }}>
                 {formatKt(savingsDelta)}
               </div>
-              <p style={{ fontFamily: "'Lora', serif", fontSize: 14, color: "#595959", marginTop: 8, lineHeight: 1.6, maxWidth: 480 }}>
+              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, color: "#595959", marginTop: 8, lineHeight: 1.6, maxWidth: 480 }}>
                 Switching from {shortName(worstScenario.jurisdiction.name)} to {shortName(bestScenario.jurisdiction.name)} avoids {savingsPercent}% of lifetime Scope 2 emissions.
               </p>
             </div>
@@ -297,7 +308,7 @@ export default function CarbonPage() {
         )}
 
         {/* Methodology Footer */}
-        <section className="mx-auto w-full" style={{ maxWidth: 1024 }}>
+        <section className="w-full">
           <div style={{ borderLeft: "2px solid #E84C3D", paddingLeft: 12 }}>
             <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 13, fontStyle: "italic", color: "#1A1A1A", opacity: 0.6, lineHeight: 1.7 }}>
               Energy = DC size × PUE × 8,760h × 95% utilisation. Emissions = energy × carbon intensity (Scope 2, location-based). Grid decarb reduces intensity annually for grid-connected sources; islanded sources hold constant. Embodied carbon not included.
@@ -321,11 +332,11 @@ function SliderParam({
 }) {
   return (
     <div>
-      <div className="flex items-baseline justify-between mb-3">
+      <div className="flex items-baseline justify-between mb-2">
         <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#595959" }}>
           {label}
         </span>
-        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 500, color: "#1A1A1A" }}>
+        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 500, color: "#1A1A1A" }}>
           {value}
         </span>
       </div>
@@ -339,7 +350,7 @@ function SliderParam({
         className="w-full carbon-slider"
         style={{ accentColor: "#E84C3D" }}
       />
-      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6B6B6B", marginTop: 6 }}>
+      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#6B6B6B", marginTop: 4 }}>
         {note}
       </p>
     </div>
