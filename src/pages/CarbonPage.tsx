@@ -44,33 +44,18 @@ export default function CarbonPage() {
 
   return (
     <div style={{ background: "#FAF8F5" }} className="min-h-screen">
-      {/* Sticky Header — matching data.hutchinsclimate.com exactly */}
-      <header className="sticky top-0 z-50 mx-auto" style={{ padding: "12px 32px", background: "#FAF8F5", maxWidth: 1280 }}>
-        <div
-          className="flex items-center justify-between"
-          style={{
-            background: "rgba(250, 248, 245, 0.8)",
-            backdropFilter: "blur(12px)",
-            border: "1px solid rgba(26, 26, 26, 0.05)",
-            borderRadius: 16,
-            boxShadow: "rgba(26,26,26,0.05) 0px 20px 25px -5px, rgba(26,26,26,0.05) 0px 8px 10px -6px",
-            height: 62,
-            padding: "0 24px",
-          }}
-        >
-          <div className="flex items-center gap-4">
-            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, fontWeight: 700, letterSpacing: "-1.2px", color: "#1A1A1A" }}>
-              Hutchins Climate Capital
-            </span>
-            <div style={{ width: 1, height: 24, background: "rgba(26, 26, 26, 0.12)" }} />
-            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 500, color: "#1A1A1A" }}>
-              Data Centre Emissions
-            </span>
+      {/* Shared header from hutchins-header.css */}
+      <header className="hutchins-header">
+        <div className="hutchins-header-pill">
+          <div className="hutchins-header-left">
+            <span className="hutchins-header-brand">Hutchins Climate Capital</span>
+            <div className="hutchins-header-divider" />
+            <span className="hutchins-header-subtitle">Data Centre Emissions</span>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto py-4 flex flex-col gap-5" style={{ maxWidth: 1280, padding: "16px 32px" }}>
+      <main className="hutchins-container" style={{ paddingTop: 16, paddingBottom: 16, display: "flex", flexDirection: "column", gap: 20 }}>
         {/* Hero — minimal */}
         <section className="text-center flex flex-col items-center gap-1 pt-1 pb-0">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 600, color: "#1A1A1A", lineHeight: 1.15 }}>
