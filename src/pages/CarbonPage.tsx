@@ -44,12 +44,11 @@ export default function CarbonPage() {
 
   return (
     <div style={{ background: "#FAF8F5" }} className="min-h-screen">
-      {/* Sticky Header — Hurdle-style glass pill */}
-      <header className="sticky top-0 z-50" style={{ padding: "12px 32px", background: "#FAF8F5" }}>
+      {/* Sticky Header — matching data.hutchinsclimate.com exactly */}
+      <header className="sticky top-0 z-50 mx-auto" style={{ padding: "12px 32px", background: "#FAF8F5", maxWidth: 1280 }}>
         <div
-          className="mx-auto flex items-center justify-between"
+          className="flex items-center justify-between"
           style={{
-            maxWidth: 1280,
             background: "rgba(250, 248, 245, 0.8)",
             backdropFilter: "blur(12px)",
             border: "1px solid rgba(26, 26, 26, 0.05)",
@@ -71,7 +70,7 @@ export default function CarbonPage() {
         </div>
       </header>
 
-      <main className="mx-auto px-4 sm:px-8 py-4 flex flex-col gap-5" style={{ maxWidth: 1280 }}>
+      <main className="mx-auto py-4 flex flex-col gap-5" style={{ maxWidth: 1280, padding: "16px 32px" }}>
         {/* Hero — minimal */}
         <section className="text-center flex flex-col items-center gap-1 pt-1 pb-0">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 600, color: "#1A1A1A", lineHeight: 1.15 }}>
