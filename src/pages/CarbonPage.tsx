@@ -4,7 +4,7 @@ import { calculateEmissions, BASE_YEAR } from "@/lib/carbon-calc";
 import { CumulativeChart } from "@/components/carbon/CumulativeChart";
 import { ArrowRight } from "lucide-react";
 
-const SCENARIO_COLORS = ["#E84C3D", "#F4AFA8", "#6B6B6B"] as const;
+const SCENARIO_COLORS = ["#E84C3D", "#F28B80", "#6B6B6B"] as const;
 const SCENARIO_LABELS = ["A", "B", "C"] as const;
 const DC_SIZES = [10, 25, 50, 100, 250, 500, 1000, 2000, 5000, 10000];
 const DEFAULT_SELECTIONS = ["ie", "solar_bess", "gas_ccgt"];
@@ -60,7 +60,7 @@ export default function CarbonPage() {
         <section className="text-center flex flex-col items-center gap-1 pt-1 pb-0">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 600, color: "#1A1A1A", lineHeight: 1.15 }}>
             Data Centre{" "}
-            <span style={{ fontStyle: "italic", color: "#E84C3D" }}>Emissions</span>
+            <span style={{ fontStyle: "italic", fontWeight: 400, color: "#E84C3D" }}>Emissions</span>
           </h1>
           <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, color: "rgba(26,26,26,0.8)", maxWidth: 640, lineHeight: 1.5 }}>
             Lifetime Scope 2 emissions across grid-connected and islanded power scenarios.
@@ -95,7 +95,7 @@ export default function CarbonPage() {
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         background: SCENARIO_COLORS[i],
-                        color: i === 1 ? "#1A1A1A" : "#fff",
+                        color: "#fff",
                       }}
                     >
                       {label}
@@ -298,7 +298,7 @@ export default function CarbonPage() {
               Energy = DC size × PUE × 8,760h × 95% utilisation. Emissions = energy × carbon intensity (Scope 2, location-based). Grid decarb reduces intensity annually for grid-connected sources; islanded sources hold constant. Embodied carbon not included.
             </p>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.15em", color: "#595959", marginTop: 8 }}>
-              Sources: IEA, EirGrid, EPA eGRID, EMBER
+              Sources: IEA, EPA eGRID, EMBER
             </p>
           </div>
         </section>
