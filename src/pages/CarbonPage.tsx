@@ -63,19 +63,6 @@ export default function CarbonPage() {
               DATA CENTRE EMISSIONS
             </span>
           </div>
-          <span
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 11,
-              fontWeight: 500,
-              background: "hsla(0, 0%, 10%, 0.04)",
-              color: "#595959",
-              padding: "6px 14px",
-              borderRadius: 9999,
-            }}
-          >
-            Hutchins Climate Capital
-          </span>
         </div>
       </header>
 
