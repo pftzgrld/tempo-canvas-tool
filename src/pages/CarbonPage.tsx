@@ -59,25 +59,22 @@ export default function CarbonPage() {
               Hutchins Climate Capital
             </span>
             <div style={{ width: 1, height: 24, background: "hsla(0, 0%, 10%, 0.10)" }} />
-            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.15em", color: "#595959" }}>
-              DATA CENTRE EMISSIONS
+            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 500, color: "#1A1A1A" }}>
+              Data Centre Emissions
             </span>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto px-4 sm:px-6 py-10 flex flex-col gap-8" style={{ maxWidth: 1280 }}>
-        {/* Hero */}
-        <section className="text-center flex flex-col items-center gap-4 pt-4 pb-2">
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#E84C3D" }}>
-            SCOPE 2 EMISSIONS MODELLING
-          </span>
+      <main className="mx-auto px-4 sm:px-6 py-6 flex flex-col gap-6" style={{ maxWidth: 1280 }}>
+        {/* Hero — compact */}
+        <section className="text-center flex flex-col items-center gap-2 pt-2 pb-0">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 600, color: "#1A1A1A", lineHeight: 1.15 }}>
             Data Centre{" "}
             <span style={{ fontStyle: "italic", color: "#E84C3D" }}>Emissions</span>
           </h1>
-          <p style={{ fontFamily: "'Lora', serif", fontSize: 16, color: "#595959", maxWidth: 640, lineHeight: 1.7 }}>
-            Lifetime Scope 2 emissions across grid-connected and islanded power scenarios. Compare jurisdictions, adjust facility parameters, and model grid decarbonisation.
+          <p style={{ fontFamily: "'Lora', serif", fontSize: 15, color: "#595959", maxWidth: 640, lineHeight: 1.6 }}>
+            Lifetime Scope 2 emissions across grid-connected and islanded power scenarios.
           </p>
         </section>
 
@@ -161,7 +158,20 @@ export default function CarbonPage() {
           </div>
         </section>
 
-        {/* Parameters */}
+        {/* Chart — immediately after scenario cards */}
+        <section className="mx-auto w-full" style={{ maxWidth: 1024 }}>
+          <CumulativeChart
+            activeScenarios={activeScenarios.map((s) => ({
+              label: SCENARIO_LABELS[s.index],
+              color: SCENARIO_COLORS[s.index],
+              result: s.result,
+              name: s.jurisdiction.name,
+            }))}
+            lifecycle={lifecycle}
+          />
+        </section>
+
+        {/* Parameters — below chart */}
         <section className="mx-auto w-full rounded-2xl p-6" style={{ maxWidth: 1024, background: "rgba(255, 255, 255, 0.90)", border: "1px solid hsla(0, 0%, 10%, 0.05)", boxShadow: "0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.04)" }}>
           <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#595959", marginBottom: 20 }}>
             FACILITY PARAMETERS
@@ -208,19 +218,6 @@ export default function CarbonPage() {
               onChange={setGridDecarb}
             />
           </div>
-        </section>
-
-        {/* Chart */}
-        <section className="mx-auto w-full" style={{ maxWidth: 1024 }}>
-          <CumulativeChart
-            activeScenarios={activeScenarios.map((s) => ({
-              label: SCENARIO_LABELS[s.index],
-              color: SCENARIO_COLORS[s.index],
-              result: s.result,
-              name: s.jurisdiction.name,
-            }))}
-            lifecycle={lifecycle}
-          />
         </section>
 
         {/* Lifetime Totals */}
