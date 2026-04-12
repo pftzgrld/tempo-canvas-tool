@@ -46,11 +46,13 @@ export default function CarbonPage() {
     <div style={{ background: "#FAF8F5" }} className="min-h-screen">
       {/* Shared header from hutchins-header.css */}
       <header className="hutchins-header">
-        <div className="hutchins-header-pill">
-          <div className="hutchins-header-left">
-            <span className="hutchins-header-brand">Hutchins Climate Capital</span>
-            <div className="hutchins-header-divider" />
-            <span className="hutchins-header-subtitle">Data Centre Emissions</span>
+        <div className="hutchins-header-inner">
+          <div className="hutchins-header-pill">
+            <div className="hutchins-header-left">
+              <span className="hutchins-header-brand">Hutchins Climate Capital</span>
+              <div className="hutchins-header-divider" />
+              <span className="hutchins-header-subtitle">Data Centre Emissions</span>
+            </div>
           </div>
         </div>
       </header>
@@ -303,6 +305,20 @@ export default function CarbonPage() {
           </div>
         </section>
       </main>
+
+      <footer className="hutchins-footer">
+        <div className="hutchins-footer-inner">
+          <div>
+            <div className="hutchins-footer-brand">Hutchins Climate Capital</div>
+            <div className="hutchins-footer-copy">&copy; 2026 Hutchins Climate Capital Ltd.</div>
+          </div>
+          <div className="hutchins-footer-links">
+            <a href="https://hutchinsclimate.com">hutchinsclimate.com</a>
+            <a href="https://data.hutchinsclimate.com/terms">Terms</a>
+            <a href="https://data.hutchinsclimate.com/privacy">Privacy</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
