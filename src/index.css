@@ -302,16 +302,34 @@
   border: none;
 }
 
-/* Footer alignment fix — ensure pixel-perfect match with Hurdle site */
+/* Footer alignment fix — ensure pixel-perfect match with Hurdle site.
+   The shared hutchins-header.css wildcard reset sets line-height:1.4
+   but Tailwind preflight can override it on certain elements. 
+   Force the exact values from the shared CSS to guarantee consistency. */
 .hutchins-footer-inner {
   align-items: flex-start !important;
 }
 .hutchins-footer-brand {
-  margin-bottom: 0 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 .hutchins-footer-copy {
-  margin-top: 4px !important;
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+  margin: 4px 0 0 0 !important;
+  padding: 0 !important;
 }
 .hutchins-footer-links {
-  margin-top: 2px !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.hutchins-footer-links a {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
