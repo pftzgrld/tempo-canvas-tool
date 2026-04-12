@@ -314,8 +314,8 @@ export default function CarbonPage() {
           </div>
           <div className="hutchins-footer-links">
             <a href="https://hutchinsclimate.com">hutchinsclimate.com</a>
-            <a href="https://data.hutchinsclimate.com/terms">Terms</a>
-            <a href="https://data.hutchinsclimate.com/privacy">Privacy</a>
+            <a href="https://hutchinsclimate.com/terms">Terms</a>
+            <a href="https://hutchinsclimate.com/privacy">Privacy</a>
           </div>
         </div>
       </footer>
