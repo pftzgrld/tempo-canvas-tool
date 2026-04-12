@@ -301,3 +301,17 @@
   cursor: pointer;
   border: none;
 }
+
+/* Footer alignment fix — ensure pixel-perfect match with Hurdle site */
+.hutchins-footer-inner {
+  align-items: flex-start !important;
+}
+.hutchins-footer-brand {
+  margin-bottom: 0 !important;
+}
+.hutchins-footer-copy {
+  margin-top: 4px !important;
+}
+.hutchins-footer-links {
+  margin-top: 2px !important;
+}
