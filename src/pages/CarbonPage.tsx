@@ -231,17 +231,17 @@ export default function CarbonPage() {
 
           {/* Parameters — sidebar */}
           <div
-            className="lg:w-[280px] shrink-0 rounded-2xl p-5"
+            className="lg:w-[280px] shrink-0 rounded-2xl p-5 flex flex-col"
             style={{
               background: "rgba(255, 255, 255, 0.90)",
               border: "1px solid rgba(26, 26, 26, 0.05)",
               boxShadow: "rgba(0,0,0,0.05) 0px 20px 25px -5px, rgba(0,0,0,0.04) 0px 8px 10px -6px",
             }}
           >
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#595959", marginBottom: 20 }}>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#595959", marginBottom: 12 }}>
               FACILITY PARAMETERS
             </div>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col justify-between flex-1">
               <SliderParam
                 label="DC Size"
                 value={formatMW(dcSizeMW)}
