@@ -297,7 +297,7 @@ export default function CarbonPage() {
                 const maxTotal = sortedForBars[0].result.totalKt;
                 const pct = (s.result.totalKt / maxTotal) * 100;
                 return (
-                  <div key={s.id} className="flex items-center gap-3">
+                  <div key={s.index} className="flex items-center gap-3">
                     <span
                       className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-semibold shrink-0"
                       style={{ background: SCENARIO_COLORS[s.index], color: s.index === 1 ? "#1A1A1A" : "#fff", fontFamily: "'Inter', sans-serif" }}
