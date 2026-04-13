@@ -87,11 +87,11 @@ export function shortName(name: string): string {
 }
 
 export function formatMW(mw: number): string {
-  return mw >= 1000 ? `${mw / 1000} GW` : `${mw} MW`;
+  return mw >= 1000 ? `${(mw / 1000).toLocaleString()} GW` : `${mw.toLocaleString()} MW`;
 }
 
 export function formatKt(kt: number): string {
-  if (kt >= 1000) return `${Math.round(kt / 1000)} Mt`;
-  if (kt < 1) return `${Math.round(kt * 1000)} t`;
-  return `${Math.round(kt)} kt`;
+  if (kt >= 1000) return `${Math.round(kt / 1000).toLocaleString()} Mt`;
+  if (kt < 1) return `${Math.round(kt * 1000).toLocaleString()} t`;
+  return `${Math.round(kt).toLocaleString()} kt`;
 }

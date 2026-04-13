@@ -1,8 +1,8 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { JURISDICTIONS, GROUPS, JURISDICTION_MAP, shortName, formatMW, formatKt } from "@/lib/jurisdictions";
 import { calculateEmissions, BASE_YEAR } from "@/lib/carbon-calc";
 import { CumulativeChart } from "@/components/carbon/CumulativeChart";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown, User, Server, BarChart3, Newspaper } from "lucide-react";
 
 const SCENARIO_COLORS = ["#E84C3D", "#F28B80", "#6B6B6B"] as const;
 const SCENARIO_LABELS = ["A", "B", "C"] as const;
@@ -15,6 +15,17 @@ export default function CarbonPage() {
   const [pue, setPue] = useState(1.30);
   const [lifecycle, setLifecycle] = useState(25);
   const [gridDecarb, setGridDecarb] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setMenuOpen(false);
+    };
+    document.addEventListener("click", close);
+    return () => document.removeEventListener("click", close);
+  }, [menuOpen]);
 
   const dcSizeMW = DC_SIZES[dcSizeIndex];
 
@@ -49,9 +60,70 @@ export default function CarbonPage() {
         <div className="hutchins-header-inner">
           <div className="hutchins-header-pill">
             <div className="hutchins-header-left">
-              <span className="hutchins-header-brand">Hutchins Climate Capital</span>
+              <a
+                href="https://hutchinsclimate.com"
+                className="hutchins-header-brand"
+                style={{ textDecoration: "none", transition: "color 0.2s ease" }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = "#E84C3D"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = "#1A1A1A"; }}
+              >Hutchins Climate Capital</a>
               <div className="hutchins-header-divider" />
               <span className="hutchins-header-subtitle">Data Centre Emissions</span>
+            </div>
+            <div ref={menuRef} style={{ position: "relative" }}>
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-expanded={menuOpen}
+                aria-haspopup="true"
+                style={{
+                  height: 36, padding: "0 16px", background: "#1A1A1A", color: "#FAF8F5",
+                  border: "none", borderRadius: 12, fontFamily: "'Inter', sans-serif",
+                  fontSize: 12, fontWeight: 500, letterSpacing: "1.2px", textTransform: "uppercase" as const,
+                  cursor: "pointer", display: "flex", alignItems: "center", gap: 8,
+                  boxShadow: "rgba(26,26,26,0.1) 0px 10px 15px -3px",
+                  transition: "all 0.2s ease", whiteSpace: "nowrap" as const,
+                }}
+              >
+                <span>Menu</span>
+                <ChevronDown size={16} style={{ transition: "transform 0.2s ease", transform: menuOpen ? "rotate(180deg)" : "rotate(0)" }} />
+              </button>
+              {menuOpen && (
+                  <div
+                    style={{
+                      position: "absolute", top: "calc(100% + 8px)", right: 0,
+                      background: "white", border: "1px solid rgba(26,26,26,0.05)",
+                      borderRadius: 12, boxShadow: "rgba(0,0,0,0.1) 0px 20px 25px -5px, rgba(0,0,0,0.1) 0px 8px 10px -6px",
+                      minWidth: 200, padding: 6, zIndex: 100,
+                    }}
+                  >
+                    {[
+                      { href: "https://hutchinsclimate.com#about", label: "About", icon: <User size={16} /> },
+                      { href: "https://dc.hutchinsclimate.com", label: "Data Centres", icon: <Server size={16} /> },
+                      { href: "https://data.hutchinsclimate.com", label: "Carbon Market Data", icon: <BarChart3 size={16} /> },
+                      { href: "https://hutchinsclimate.substack.com", label: "Blog", icon: <Newspaper size={16} /> },
+                    ].map((item) => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        target={item.href.startsWith("https://dc.") ? undefined : "_blank"}
+                        rel={item.href.startsWith("https://dc.") ? undefined : "noopener"}
+                        onClick={() => setMenuOpen(false)}
+                        style={{
+                          display: "flex", alignItems: "center", gap: 10,
+                          padding: "10px 14px", fontFamily: "'Inter', sans-serif",
+                          fontSize: 13, fontWeight: 500, color: "#1A1A1A",
+                          textDecoration: "none", borderRadius: 8,
+                          transition: "all 0.15s ease",
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(232, 76, 61, 0.08)"; e.currentTarget.style.color = "#E84C3D"; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#1A1A1A"; }}
+                      >
+                        <span style={{ color: "#595959", flexShrink: 0 }}>{item.icon}</span>
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+              )}
             </div>
           </div>
         </div>
@@ -105,6 +177,11 @@ export default function CarbonPage() {
                     <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.15em", color: "#595959" }}>
                       Scenario {label}
                     </span>
+                    {result && (
+                      <span className="ml-auto" style={{ fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 700, color: SCENARIO_COLORS[i] }}>
+                        {formatKt(result.totalKt)}
+                      </span>
+                    )}
                   </div>
 
                   <select
@@ -131,14 +208,6 @@ export default function CarbonPage() {
                       </optgroup>
                     ))}
                   </select>
-
-                  {result && (
-                    <div className="mt-3">
-                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, fontWeight: 600, color: SCENARIO_COLORS[i] }}>
-                        {formatKt(result.totalKt)}
-                      </div>
-                    </div>
-                  )}
                 </div>
               );
             })}
@@ -244,7 +313,7 @@ export default function CarbonPage() {
                         style={{ width: `${pct}%`, background: SCENARIO_COLORS[s.index], opacity: 0.85 }}
                       />
                     </div>
-                    <span className="shrink-0 w-20 text-right" style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 600, color: "#1A1A1A" }}>
+                    <span className="shrink-0 w-20 text-right" style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 500, color: "#1A1A1A" }}>
                       {formatKt(s.result.totalKt)}
                     </span>
                   </div>
@@ -264,16 +333,16 @@ export default function CarbonPage() {
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#E84C3D", marginBottom: 8 }}>
                 AVOIDABLE EMISSIONS
               </div>
-              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 3vw, 36px)", fontWeight: 700, color: "#E84C3D" }}>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(28px, 3vw, 36px)", fontWeight: 700, color: "#E84C3D" }}>
                 {formatKt(savingsDelta)}
               </div>
-              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, color: "#595959", marginTop: 8, lineHeight: 1.6, maxWidth: 480 }}>
+              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, color: "#595959", marginTop: 8, lineHeight: 1.6 }}>
                 Switching from {shortName(worstScenario.jurisdiction.name)} to {shortName(bestScenario.jurisdiction.name)} avoids {savingsPercent}% of lifetime Scope 2 emissions.
               </p>
             </div>
             <div className="flex items-center gap-3 shrink-0">
               <div className="text-center">
-                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 600, color: SCENARIO_COLORS[worstScenario.index] }}>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 700, color: SCENARIO_COLORS[worstScenario.index] }}>
                   {formatKt(worstScenario.result.totalKt)}
                 </div>
                 <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#595959" }}>
@@ -282,7 +351,7 @@ export default function CarbonPage() {
               </div>
               <ArrowRight className="w-5 h-5" style={{ color: "#595959" }} />
               <div className="text-center">
-                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 600, color: SCENARIO_COLORS[bestScenario.index] }}>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 700, color: SCENARIO_COLORS[bestScenario.index] }}>
                   {formatKt(bestScenario.result.totalKt)}
                 </div>
                 <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#595959" }}>
@@ -336,7 +405,7 @@ function SliderParam({
         <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#595959" }}>
           {label}
         </span>
-        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 500, color: "#1A1A1A" }}>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#595959" }}>
           {value}
         </span>
       </div>

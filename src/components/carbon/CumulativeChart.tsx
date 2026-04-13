@@ -143,8 +143,8 @@ function CustomTooltip({ active, payload, label }: any) {
               {p.dataKey}
             </span>
           </div>
-          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 13, fontWeight: 600, color: "#fff" }}>
-            {p.value >= 1000 ? `${(p.value / 1000).toFixed(1)} Mt` : `${Math.round(p.value)} kt`}
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: "#fff" }}>
+            {p.value >= 1000 ? `${Math.round(p.value / 1000)} Mt` : `${Math.round(p.value)} kt`}
           </span>
         </div>
       ))}
