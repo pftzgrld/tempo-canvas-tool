@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { JURISDICTIONS, GROUPS, JURISDICTION_MAP, shortName, formatMW, formatKt } from "@/lib/jurisdictions";
 import { calculateEmissions, BASE_YEAR } from "@/lib/carbon-calc";
 import { CumulativeChart } from "@/components/carbon/CumulativeChart";
-import { ArrowRight, ChevronDown, User, Server, BarChart3, Newspaper } from "lucide-react";
+import { ArrowRight, ChevronDown, User, Server, BarChart3, Newspaper, Landmark } from "lucide-react";
 
 const SCENARIO_COLORS = ["#E84C3D", "#F28B80", "#6B6B6B"] as const;
 const SCENARIO_LABELS = ["A", "B", "C"] as const;
@@ -70,60 +70,40 @@ export default function CarbonPage() {
               <div className="hutchins-header-divider" />
               <span className="hutchins-header-subtitle">Data Centre Emissions</span>
             </div>
-            <div ref={menuRef} style={{ position: "relative" }}>
+            {/* Site-switcher menu — uses canonical .hutchins-menu-* styles from the shared stylesheet. */}
+            <div ref={menuRef} className="hutchins-menu">
               <button
+                type="button"
+                className="hutchins-menu-trigger"
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-expanded={menuOpen}
                 aria-haspopup="true"
-                style={{
-                  height: 36, padding: "0 16px", background: "#1A1A1A", color: "#FAF8F5",
-                  border: "none", borderRadius: 12, fontFamily: "'Inter', sans-serif",
-                  fontSize: 12, fontWeight: 500, letterSpacing: "1.2px", textTransform: "uppercase" as const,
-                  cursor: "pointer", display: "flex", alignItems: "center", gap: 8,
-                  boxShadow: "rgba(26,26,26,0.1) 0px 10px 15px -3px",
-                  transition: "all 0.2s ease", whiteSpace: "nowrap" as const,
-                }}
               >
                 <span>Menu</span>
-                <ChevronDown size={16} style={{ transition: "transform 0.2s ease", transform: menuOpen ? "rotate(180deg)" : "rotate(0)" }} />
+                <ChevronDown size={16} />
               </button>
-              {menuOpen && (
-                  <div
-                    style={{
-                      position: "absolute", top: "calc(100% + 8px)", right: 0,
-                      background: "white", border: "1px solid rgba(26,26,26,0.05)",
-                      borderRadius: 12, boxShadow: "rgba(0,0,0,0.1) 0px 20px 25px -5px, rgba(0,0,0,0.1) 0px 8px 10px -6px",
-                      minWidth: 200, padding: 6, zIndex: 100,
-                    }}
+              <div className={`hutchins-menu-dropdown${menuOpen ? " open" : ""}`}>
+                {[
+                  { href: "https://hutchinsclimate.com#about", label: "About", icon: <User size={16} /> },
+                  { href: "https://dc.hutchinsclimate.com", label: "Data Centres", icon: <Server size={16} />, current: true },
+                  { href: "https://data.hutchinsclimate.com", label: "Carbon Market Data", icon: <BarChart3 size={16} /> },
+                  { href: "https://sc.hutchinsclimate.com", label: "Sovereign Carbon", icon: <Landmark size={16} /> },
+                  { href: "https://hutchinsclimate.substack.com", label: "Blog", icon: <Newspaper size={16} /> },
+                ].map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.current ? undefined : item.href}
+                    className={item.current ? "current" : undefined}
+                    aria-current={item.current ? "page" : undefined}
+                    target={item.current || item.href.startsWith("https://dc.") || item.href.startsWith("https://hutchinsclimate.com") ? undefined : "_blank"}
+                    rel={item.current || item.href.startsWith("https://dc.") || item.href.startsWith("https://hutchinsclimate.com") ? undefined : "noopener"}
+                    onClick={() => setMenuOpen(false)}
                   >
-                    {[
-                      { href: "https://hutchinsclimate.com#about", label: "About", icon: <User size={16} /> },
-                      { href: "https://dc.hutchinsclimate.com", label: "Data Centres", icon: <Server size={16} /> },
-                      { href: "https://data.hutchinsclimate.com", label: "Carbon Market Data", icon: <BarChart3 size={16} /> },
-                      { href: "https://hutchinsclimate.substack.com", label: "Blog", icon: <Newspaper size={16} /> },
-                    ].map((item) => (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        target={item.href.startsWith("https://dc.") ? undefined : "_blank"}
-                        rel={item.href.startsWith("https://dc.") ? undefined : "noopener"}
-                        onClick={() => setMenuOpen(false)}
-                        style={{
-                          display: "flex", alignItems: "center", gap: 10,
-                          padding: "10px 14px", fontFamily: "'Inter', sans-serif",
-                          fontSize: 13, fontWeight: 500, color: "#1A1A1A",
-                          textDecoration: "none", borderRadius: 8,
-                          transition: "all 0.15s ease",
-                        }}
-                        onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(232, 76, 61, 0.08)"; e.currentTarget.style.color = "#E84C3D"; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#1A1A1A"; }}
-                      >
-                        <span style={{ color: "#595959", flexShrink: 0 }}>{item.icon}</span>
-                        {item.label}
-                      </a>
-                    ))}
-                  </div>
-              )}
+                    {item.icon}
+                    {item.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
